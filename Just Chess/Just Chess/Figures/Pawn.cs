@@ -3,12 +3,11 @@ using Just_Chess.Figures.Contracts;
 
 namespace Just_Chess.Figures
 {
-    public class Pawn : IFigure
+    public class Pawn : BaseFigure, IFigure
     {
-        public Pawn(ChessColor color)
+        public Pawn(ChessColor color) : base(color)
         {
-            this.Color = color;
+
         }
-        public ChessColor Color { get; private set; }
     }
 }

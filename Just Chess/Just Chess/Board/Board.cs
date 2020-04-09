@@ -4,7 +4,7 @@
     using Just_Chess.Figures.Contracts;
     using System;
 
-    public class Board
+    public class Board : IBoard
     {
         private readonly IFigure[,] board;
 
