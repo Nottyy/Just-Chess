@@ -10,7 +10,6 @@
 
     public class StandardStartGameInitializationStrategy : IGameInitializationStrategy
     {
-        private const int NumberOfPlayers = 2;
         private const int BoardTotalRowsAndCols = 8;
 
         private IList<Type> figureTypes;
@@ -73,7 +72,7 @@
 
         private void ValidateStrategy(ICollection<IPlayer> players, IBoard board)
         {
-            if (players.Count != NumberOfPlayers)
+            if (players.Count != GlobalConstants.StandardGameNumberOfPlayers)
             {
                 throw new InvalidOperationException("Standard Start Game Initialization Strategy needs exactly 2 players!");
             }

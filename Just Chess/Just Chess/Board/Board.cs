@@ -55,7 +55,7 @@
                 throw new IndexOutOfRangeException("Selected row position on the board is not valid");
             }
 
-            if (position.Row < GlobalConstants.MinimumColumnValueOnBoard || position.Row > GlobalConstants.MaximumColumnValueOnBoard)
+            if (position.Col < GlobalConstants.MinimumColumnValueOnBoard || position.Col > GlobalConstants.MaximumColumnValueOnBoard)
             {
                 throw new IndexOutOfRangeException("Selected column position on the board is not valid");
             }

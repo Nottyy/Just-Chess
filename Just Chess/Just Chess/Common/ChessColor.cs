@@ -2,8 +2,8 @@
 {
     public enum ChessColor
     {
-        White,
         Black,
+        White,
         Brown
     }
 }
