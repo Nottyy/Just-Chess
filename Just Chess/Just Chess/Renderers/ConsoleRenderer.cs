@@ -24,8 +24,27 @@
 
         public void RenderBoard(IBoard board)
         {
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.WriteLine(" ");
+            //TODO: Validate Console dimensions
+            var startRowPrint = Console.WindowHeight / 2 - (board.TotalRows / 2) * CharactersPerRowPerBoardSquare;
+            var startColPrint = Console.WindowWidth / 2 - (board.TotalCols / 2) * CharactersPerColPerBoardSquare;
+
+            var currentRowPrint = startRowPrint;
+            var currentColPrint = startColPrint;
+
+            Console.BackgroundColor = ConsoleColor.White;
+            for (int top = 0; top < board.TotalRows; top++)
+            {
+                for (int left = 0; left < board.TotalCols; left++)
+                {
+                    currentRowPrint = startRowPrint + left * CharactersPerColPerBoardSquare;
+                    currentColPrint = startColPrint + top * CharactersPerRowPerBoardSquare;
+
+                    Console.SetCursorPosition(currentColPrint, currentRowPrint);
+                    Console.Write(" ");
+                }
+            }
+
+            
 
             Console.ReadLine();
         }
