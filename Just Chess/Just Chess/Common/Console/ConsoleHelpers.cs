@@ -95,7 +95,7 @@
                 case ChessColor.Brown:
                     return ConsoleColor.DarkRed;
                 default:
-                    throw new InvalidOperationException("Invalid chess color!");
+                    throw new InvalidOperationException("Cannot convert chess color!");
             }
         }
         public static void SetCursorAtCenter(int lengthOfMessage)
