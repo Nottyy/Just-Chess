@@ -76,6 +76,7 @@
 
         private void PrintBorder(int startRowPrint, int startColPrint, int totalRows, int totalCols)
         {
+            
             // check the math
             for (int i = startRowPrint - 2; i < startRowPrint + totalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 2; i++)
             {
@@ -104,6 +105,28 @@
                 Console.SetCursorPosition(startRowPrint + totalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 1, i);
                 Console.Write(" ");
             }
+
+            var startR = startRowPrint + ConsoleConstants.CharactersPerRowPerBoardSquare / 2;
+            for (int i = 0; i < totalCols; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition(startR + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startColPrint - 1);
+                Console.Write((char)('A' + i));
+
+                Console.SetCursorPosition(startR + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startColPrint + totalRows * ConsoleConstants.CharactersPerRowPerBoardSquare);
+                Console.Write((char)('A' + i));
+            }
+
+            var startC = startColPrint + ConsoleConstants.CharactersPerRowPerBoardSquare / 2;
+            for (int i = 0; i < totalRows; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition(startRowPrint - 1, startC + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.Write(totalRows - i);
+
+                Console.SetCursorPosition(startRowPrint + totalCols * ConsoleConstants.CharactersPerColPerBoardSquare, startC + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.Write(totalRows - i);
+            }  
         }
 
         public void PrintErrorMessage(string errorMessage)
