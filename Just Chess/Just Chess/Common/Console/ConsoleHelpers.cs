@@ -118,7 +118,8 @@
 
             for (int i = 0; i < figurePattern.GetLength(0); i++)
             {
-                for (int j = 0; j < figurePattern.GetLength(1); j++)
+                for (int j = 0; j < figurePattern.GetLength(1); 
+                    j++)
                 {
                     Console.SetCursorPosition(left + j, top + i);
 
@@ -146,6 +147,31 @@
                     Console.Write(" ");
                 }
             }
+        }
+
+        public static Move CreateMoveFromCommand(string command)
+        {
+            var positionAsStringParts = command.Split(new[] { '-' });
+
+            if (positionAsStringParts.Length != 2)
+            {
+                throw new InvalidOperationException("Invalid Command! Type Again From/To moves!");
+            }
+
+            var fromAsString = positionAsStringParts[0];
+            var toAsString = positionAsStringParts[1];
+
+            var fromPosition = Position.FromChessCoordinates(fromAsString[1] - '0', fromAsString[0]);
+            var toPosition = Position.FromChessCoordinates(toAsString[1] - '0', toAsString[0]);
+
+            return new Move(fromPosition, toPosition);
+        }
+
+        public static void ClearRow(int row)
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.SetCursorPosition(0, row);
+            Console.Write(new string(' ', Console.WindowWidth));
         }
     }
 }

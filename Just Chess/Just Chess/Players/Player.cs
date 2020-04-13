@@ -12,6 +12,7 @@
 
         public Player(string name, ChessColor color)
         {
+            // TODO: validate player names to be less than 10 characters
             this.Name = name;
             this.figures = new List<IFigure>();
             this.Color = color;        }

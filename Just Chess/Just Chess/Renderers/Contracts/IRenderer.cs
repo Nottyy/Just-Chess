@@ -9,5 +9,6 @@ namespace Just_Chess.Renderers.Contracts
     {
         void RenderMainMenu();
         void RenderBoard(IBoard board);
+        void PrintErrorMessage(string errorMessage);
     }
 }
