@@ -132,7 +132,7 @@
         public void PrintErrorMessage(string errorMessage)
         {
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRoweForPlayerIO);
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 10, ConsoleConstants.ConsoleRoweForPlayerIO);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - errorMessage.Length / 2, ConsoleConstants.ConsoleRoweForPlayerIO);
             Console.Write(errorMessage);
             Thread.Sleep(2500);
 

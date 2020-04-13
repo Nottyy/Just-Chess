@@ -1,4 +1,6 @@
 ﻿using Just_Chess.Common;
+using Just_Chess.Movements.Contracts;
+using System.Collections.Generic;
 
 namespace Just_Chess.Figures.Contracts
 {
@@ -10,5 +12,7 @@ namespace Just_Chess.Figures.Contracts
         }
 
         public ChessColor Color { get; private set; }
+
+        public abstract ICollection<IMovement> Move();
     }
 }
