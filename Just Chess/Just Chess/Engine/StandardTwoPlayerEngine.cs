@@ -60,8 +60,10 @@
                     var player = this.GetNextPlayer();
                     var move = this.input.GetNextPlayerMove(player);
                     var from = move.From;
+                    var to = move.To;
                     var figure = this.board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
+                    this.CheckIfToPositionIsEmpty(figure, to);
 
                     var availableMovements = figure.Move();
                     foreach (var movement in availableMovements)
@@ -122,6 +124,15 @@
             if (figure.Color != player.Color)
             {
                 throw new InvalidOperationException(string.Format("Figure at {0}{1} is not yours!", from.Col, from.Row));
+            }
+        }
+
+        private void CheckIfToPositionIsEmpty(IFigure figure, Position to)
+        {
+            var figureAtPosition = this.board.GetFigureAtPosition(to);
+            if (figureAtPosition != null && figureAtPosition.Color == figure.Color)
+            {
+                throw new InvalidOperationException(string.Format("You already have figure at position {0}{1}!", to.Col, to.Row));
             }
         }
     }

@@ -4,6 +4,7 @@
 
     using Just_Chess.Common;
     using Just_Chess.Figures.Contracts;
+    using Just_Chess.Movements;
     using Just_Chess.Movements.Contracts;
     public class Pawn : BaseFigure, IFigure
     {
@@ -14,7 +15,11 @@
 
         public override ICollection<IMovement> Move()
         {
-            throw new System.NotImplementedException();
+            return new List<IMovement>
+            {
+                new NormalPawnMovement(),
+                //new AnPasanMovement()
+            };
         }
     }
 }
