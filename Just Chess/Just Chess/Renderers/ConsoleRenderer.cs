@@ -41,7 +41,9 @@
             var currentRowPrint = startRowPrint;
             var currentColPrint = startColPrint;
 
-            int counter = 0;
+            this.PrintBorder(startRowPrint,startColPrint, board.TotalRows, board.TotalCols);
+
+            int counter = 1;
             for (int top = 0; top < board.TotalRows; top++)
             {
                 for (int left = 0; left < board.TotalCols; left++)
@@ -69,6 +71,38 @@
                     counter++;
                 }
                 counter++;
+            }
+        }
+
+        private void PrintBorder(int startRowPrint, int startColPrint, int totalRows, int totalCols)
+        {
+            // check the math
+            for (int i = startRowPrint - 2; i < startRowPrint + totalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(i, startColPrint - 2);
+                Console.Write(" ");
+            }
+
+            for (int i = startRowPrint - 2; i < startRowPrint + totalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(i, startColPrint + totalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 1);
+                Console.Write(" ");
+            }
+
+            for (int i = startColPrint - 2; i < startColPrint + totalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(startRowPrint - 2, i);
+                Console.Write(" ");
+            }
+
+            for (int i = startColPrint - 2; i < startColPrint + totalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(startRowPrint + totalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 1, i);
+                Console.Write(" ");
             }
         }
 
