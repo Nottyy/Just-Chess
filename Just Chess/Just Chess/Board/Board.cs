@@ -54,5 +54,16 @@
         {
             return chessCol - 'a';
         }
+
+        public void MoveFigureAtPosition(IFigure figure, Position from, Position to)
+        {
+            int arrFromRow = this.GetArrayRow(from.Row);
+            int arrFromCol = this.GetArrayCol(from.Col);
+            this.board[arrFromRow, arrFromCol] = null;
+
+            int arrmToRow = this.GetArrayRow(to.Row);
+            int arrToCol = this.GetArrayCol(to.Col);
+            this.board[arrmToRow, arrToCol] = figure; ;
+        }
     }
 }

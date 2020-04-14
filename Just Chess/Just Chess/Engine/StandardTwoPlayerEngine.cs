@@ -71,6 +71,9 @@
                         movement.ValidateMove(figure, board, move);
                     }
 
+                    board.MoveFigureAtPosition(figure, from, to);
+                    this.renderer.RenderBoard(board);
+
                     // TODO: If not castle - move figure ( check castle - check if castle is valid, check pawn for An-Pasa.
                     // TODO: Check check
                     // TODO: If in check - check checkmate
