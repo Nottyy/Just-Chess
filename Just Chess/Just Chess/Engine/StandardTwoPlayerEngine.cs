@@ -11,6 +11,8 @@
     using System.Collections.Generic;
     using Just_Chess.Players;
     using Just_Chess.Figures.Contracts;
+    using Just_Chess.Movements.Contracts;
+    using Just_Chess.Movements.Strategies;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -18,6 +20,7 @@
         private readonly IRenderer renderer;
         private readonly IInputProvider input;
         private readonly IBoard board;
+        private readonly IMovementStrategy strategy;
 
         private int currentPlayerIndex;
 
@@ -26,6 +29,7 @@
             this.renderer = renderer;
             this.input = inputProvider;
             this.board = new Board();
+            this.strategy = new NormalMovementStrategy();
         }
 
         public IEnumerable<IPlayer> Players
@@ -65,7 +69,7 @@
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionIsEmpty(figure, to);
 
-                    var availableMovements = figure.Move();
+                    var availableMovements = figure.Move(this.strategy);
                     foreach (var movement in availableMovements)
                     {
                         movement.ValidateMove(figure, board, move);

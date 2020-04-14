@@ -6,6 +6,7 @@
     using Just_Chess.Movements.Contracts;
     using System;
 
+    // TODO: add pawn at last row logic
     public class NormalPawnMovement : IMovement
     {
         private const string PawnsBackwardsErrorMessage = "Pawns cannot move backwards or stay at the same row!";
@@ -16,6 +17,22 @@
             var otherFigureColor = figure.Color == ChessColor.White ? ChessColor.Black : ChessColor.White;
             var from = move.From;
             var to = move.To;
+
+            // Check normal pawn move
+            if (from.Row + 1 == to.Row && from.Col == to.Col && currentFigurCcolor == ChessColor.White)
+            {
+                if (!this.CheckIfThereIsOpponentFigureAtPostion(board, to, currentFigurCcolor))
+                {
+                    return;
+                }
+            }
+            else if (from.Row - 1 == to.Row && from.Col == to.Col && currentFigurCcolor == ChessColor.Black)
+            {
+                if (!this.CheckIfThereIsOpponentFigureAtPostion(board, to, currentFigurCcolor))
+                {
+                    return;
+                }
+            }
 
             // Check if the move is backwards or on the same row
             if (currentFigurCcolor == ChessColor.White && move.To.Row <= move.From.Row) 
@@ -33,7 +50,7 @@
             {
                 if (from.Row + 1 == to.Row && this.CheckDiagonalMove(from,to))
                 {
-                    if (this.CheckOtherFigureIfValid(board, to, currentFigurCcolor))
+                    if (this.CheckIfThereIsOpponentFigureAtPostion(board, to, currentFigurCcolor)) // if there is no figure this returns true
                     {
                         return;
                     }
@@ -43,7 +60,7 @@
             {
                 if (from.Row - 1 == to.Row && this.CheckDiagonalMove(from, to))
                 {
-                    if (this.CheckOtherFigureIfValid(board, to, currentFigurCcolor))
+                    if (this.CheckIfThereIsOpponentFigureAtPostion(board, to, currentFigurCcolor))
                     {
                         return;
                     }
@@ -54,47 +71,33 @@
             // Check if pawn can make initial 2 row move
             if (from.Row == 2 && currentFigurCcolor == ChessColor.White) 
             {
-                if (from.Row + 2 == to.Row && from.Col == to.Col && this.CheckOtherFigureIfValid(board,to, otherFigureColor))
+                if (from.Row + 2 == to.Row && from.Col == to.Col && !this.CheckIfThereIsOpponentFigureAtPostion(board,to, otherFigureColor))
                 {
                     return;
                 }
             }
             else if (from.Row == 7 && currentFigurCcolor == ChessColor.Black)
             {
-                if (from.Row - 2 == to.Row && from.Col == to.Col && this.CheckOtherFigureIfValid(board, to, otherFigureColor))
+                if (from.Row - 2 == to.Row && from.Col == to.Col && !this.CheckIfThereIsOpponentFigureAtPostion(board, to, otherFigureColor))
                 {
                     return;
                 }
             }
 
-            if (from.Row + 1 == to.Row && currentFigurCcolor == ChessColor.White)
-            {
-                if (this.CheckOtherFigureIfValid(board, to, otherFigureColor))
-                {
-                    return;
-                }
-            }
-            else if (from.Row - 1 == to.Row && currentFigurCcolor == ChessColor.Black)
-            {
-                if (this.CheckOtherFigureIfValid(board, to, otherFigureColor))
-                {
-                    return;
-                }
-            }
-
+            // if none of the above moves is valid, the move is invalid
             throw new InvalidOperationException(PawnInvalidMove);
-            /////
         }
 
-        private bool CheckOtherFigureIfValid(IBoard board, Position to, ChessColor cuurentFigureColor)
+        private bool CheckIfThereIsOpponentFigureAtPostion(IBoard board, Position to, ChessColor cuurentFigureColor)
         {
             var otherFigure = board.GetFigureAtPosition(to);
-            if (otherFigure != null && otherFigure.Color == cuurentFigureColor)
+
+            if (otherFigure != null && otherFigure.Color != cuurentFigureColor)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         private bool CheckDiagonalMove(Position from, Position to)

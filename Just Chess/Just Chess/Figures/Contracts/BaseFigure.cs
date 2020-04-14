@@ -6,6 +6,7 @@ namespace Just_Chess.Figures.Contracts
 {
     public abstract class BaseFigure : IFigure
     {
+        // TODO: remove all inheritance and use FigureType enum
         protected BaseFigure(ChessColor color)
         {
             this.Color = color;
@@ -13,6 +14,6 @@ namespace Just_Chess.Figures.Contracts
 
         public ChessColor Color { get; private set; }
 
-        public abstract ICollection<IMovement> Move();
+        public abstract ICollection<IMovement> Move(IMovementStrategy strategy);
     }
 }

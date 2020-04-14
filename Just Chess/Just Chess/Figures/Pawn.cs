@@ -13,13 +13,9 @@
 
         }
 
-        public override ICollection<IMovement> Move()
+        public override ICollection<IMovement> Move(IMovementStrategy strategy)
         {
-            return new List<IMovement>
-            {
-                new NormalPawnMovement(),
-                //new AnPasanMovement()
-            };
+            return strategy.GetAllMovements(this.GetType().Name);
         }
     }
 }
