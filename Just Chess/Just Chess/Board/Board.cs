@@ -45,16 +45,6 @@
             return this.board[arrRow, arrCol];
         }
 
-        private int GetArrayRow(int chessRow)
-        {
-            return this.TotalRows - chessRow;
-        }
-
-        private int GetArrayCol(char chessCol)
-        {
-            return chessCol - 'a';
-        }
-
         public void MoveFigureAtPosition(IFigure figure, Position from, Position to)
         {
             int arrFromRow = this.GetArrayRow(from.Row);
@@ -64,6 +54,27 @@
             int arrmToRow = this.GetArrayRow(to.Row);
             int arrToCol = this.GetArrayCol(to.Col);
             this.board[arrmToRow, arrToCol] = figure; ;
+        }
+        public bool CheckIfThereIsFigureAtPosition(Position position)
+        {
+            var otherFigure = this.GetFigureAtPosition(position);
+
+            if (otherFigure != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private int GetArrayRow(int chessRow)
+        {
+            return this.TotalRows - chessRow;
+        }
+
+        private int GetArrayCol(char chessCol)
+        {
+            return chessCol - 'a';
         }
     }
 }

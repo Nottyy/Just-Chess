@@ -14,5 +14,7 @@
 
         IFigure GetFigureAtPosition(Position position);
         void MoveFigureAtPosition(IFigure figure, Position from, Position to);
+
+        bool CheckIfThereIsFigureAtPosition(Position position);
     }
 }

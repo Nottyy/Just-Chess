@@ -26,30 +26,28 @@
             int rowIndex = from.Row;
             char collIndex = from.Col;
 
+            var rowDirection = to.Row > from.Row ? 1 : -1;
+            var colDirection = to.Col > from.Col ? 1 : -1;
+
             //top-right
             while (true)
             {
-                rowIndex++;
-                collIndex++;
+                rowIndex += rowDirection;
+                collIndex += (char)colDirection;
 
-                this.CheckDiagonalDirections(rowIndex, collIndex, to, board);
-            }
-        }
+                // This is the finish position of the movement(TO position)
+                // We already check if the position we want to move is owned by our figure, which means we always can move as there can be only opponent figure or null at this position
+                if (rowIndex == to.Row && collIndex == to.Col)
+                {
+                    return;
+                }
 
-        private void CheckDiagonalDirections(int rowIndex, char colIndex, Position to, IBoard board)
-        {
-            // This is the finish position of the movement (TO position)
-            if (rowIndex == to.Row && colIndex == to.Col)
-            {
-                return;
-            }
+                var position = Position.FromChessCoordinates(rowIndex, collIndex);
 
-            var position = Position.FromChessCoordinates(rowIndex, colIndex);
-            var figureAtPosition = board.GetFigureAtPosition(position);
-
-            if (figureAtPosition != null)
-            {
-                throw new InvalidOperationException("There is a figure on your way!");
+                if (board.CheckIfThereIsFigureAtPosition(position))
+                {
+                    throw new InvalidOperationException("There is a figure on your way!");
+                }
             }
         }
     }
