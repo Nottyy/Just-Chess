@@ -20,7 +20,6 @@
         public void ValidateMove(IFigure figure, IBoard board, Move move)
         {
             var currentFigurCcolor = figure.Color;
-            var otherFigureColor = figure.Color == ChessColor.White ? ChessColor.Black : ChessColor.White;
             var from = move.From;
             var to = move.To;
 

@@ -8,7 +8,6 @@
 
     public class NormalBishopMovement : IMovement
     {
-        private const string BishopInvalidMove = "Bishops cannot move this way!";
 
         public void ValidateMove(IFigure figure, IBoard board, Move move)
         {
@@ -17,7 +16,7 @@
 
             if (rowDistance != colDistance)
             {
-                throw new InvalidOperationException(BishopInvalidMove);
+                throw new InvalidOperationException(string.Format(GlobalErrorMessages.InvalidMove, figure.GetType().Name));
             }
 
             var from = move.From;

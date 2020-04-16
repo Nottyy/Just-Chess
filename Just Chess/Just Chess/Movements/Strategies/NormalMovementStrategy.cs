@@ -35,7 +35,12 @@ namespace Just_Chess.Movements.Strategies
                     new NormalRookMovement(),
                     new NormalBishopMovement()
                 }
-
+            },
+            {
+                "Knight", new List<IMovement>
+                {
+                    new NormalKnightMovement(),
+                }
             },
 
         };
