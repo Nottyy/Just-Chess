@@ -13,6 +13,7 @@
     using Just_Chess.Figures.Contracts;
     using Just_Chess.Movements.Contracts;
     using Just_Chess.Movements.Strategies;
+    using System.Collections;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -70,10 +71,7 @@
                     this.CheckIfToPositionIsEmpty(figure, to);
 
                     var availableMovements = figure.Move(this.strategy);
-                    foreach (var movement in availableMovements)
-                    {
-                        movement.ValidateMove(figure, board, move);
-                    }
+                    this.ValidateMoves(availableMovements, figure, move);
 
                     board.MoveFigureAtPosition(figure, from, to);
                     this.renderer.RenderBoard(board);
@@ -89,6 +87,31 @@
                     this.currentPlayerIndex--;
                     this.renderer.PrintErrorMessage(ex.Message);
                 }
+            }
+        }
+
+        private void ValidateMoves(IEnumerable<IMovement> availableMovements, IFigure figure, Move move)
+        {
+            bool isMoveValid = false;
+            var exceptionFound = new Exception();
+
+            foreach (var movement in availableMovements)
+            {
+                try
+                {
+                    movement.ValidateMove(figure, this.board, move);
+                    isMoveValid = true;
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    exceptionFound = ex;
+                }
+            }
+
+            if (!isMoveValid)
+            {
+                throw exceptionFound;
             }
         }
 

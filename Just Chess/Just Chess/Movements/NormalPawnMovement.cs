@@ -16,6 +16,7 @@
         private const int BlackPawnInitialRowPosition = 7;
 
         private const int PawnTwoStepMovement = 2;
+
         public void ValidateMove(IFigure figure, IBoard board, Move move)
         {
             var currentFigurCcolor = figure.Color;
@@ -72,7 +73,6 @@
                 }
             }
 
-            // TODO: add these magic numbers as constants!
             // Check if pawn can make initial 2 row move
             if (from.Row == WhitePawnInitialRowPosition && currentFigurCcolor == ChessColor.White) 
             {

@@ -22,6 +22,21 @@ namespace Just_Chess.Movements.Strategies
                     new NormalBishopMovement()
                 }
             },
+            {
+                "Rook", new List<IMovement>
+                {
+                    new NormalRookMovement()
+                }
+
+            },
+            {
+                "Queen", new List<IMovement>
+                {
+                    new NormalRookMovement(),
+                    new NormalBishopMovement()
+                }
+
+            },
 
         };
         public IList<IMovement> GetAllMovements(string figureName)

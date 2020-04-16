@@ -4,7 +4,7 @@
     {
         public static void Main()
         {
-            System.Console.WriteLine('4' - '0');
+            //System.Console.WriteLine(true || false || false || false);
             ChessFacade.Start();
         }
     }
